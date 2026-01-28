@@ -3,8 +3,8 @@
    ========================================================================== */
 const CONFIG = {
 	// Birthday target (local time). Example: Jan 30, 2026 at 00:00:00
-	// targetDate: new Date("2026-01-29T00:00:00"),
-    targetDate: new Date(Date.now() + 10_000), // TEST MODE: unlock after 10 seconds
+	targetDate: new Date("2026-01-29T00:00:00"),
+    // targetDate: new Date(Date.now() + 10_000), // TEST MODE: unlock after 10 seconds
 
 	// Secret password (case-sensitive by default)
 	password: "carter road",
