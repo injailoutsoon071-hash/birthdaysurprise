@@ -3,8 +3,8 @@
    ========================================================================== */
 const CONFIG = {
 	// Birthday target (local time). Example: Jan 30, 2026 at 00:00:00
-	targetDate: new Date("2026-01-29T00:00:00"),
-    // targetDate: new Date(Date.now() + 10_000), // TEST MODE: unlock after 10 seconds
+	// targetDate: new Date("2026-01-29T00:00:00"),
+    targetDate: new Date(Date.now() + 10_000), // TEST MODE: unlock after 10 seconds
 
 	// Secret password (case-sensitive by default)
 	password: "carter road",
@@ -405,20 +405,16 @@ function init() {
 		passwordInput.focus();
 	});
 
-	// NEW: if autoplay is blocked, start music on the first user interaction anywhere
-	const onFirstGesture = () => {
-		tryAutoStartMusic();
-		window.removeEventListener("pointerdown", onFirstGesture, true);
-		window.removeEventListener("keydown", onFirstGesture, true);
-	};
-	window.addEventListener("pointerdown", onFirstGesture, true);
-	window.addEventListener("keydown", onFirstGesture, true);
+	// REMOVED: global first-gesture music start (was starting on any click)
+	// const onFirstGesture = () => { ... }
+	// window.addEventListener("pointerdown", onFirstGesture, true);
+	// window.addEventListener("keydown", onFirstGesture, true);
 
-	// NEW: retry when user clicks Continue on wish page (counts as a gesture)
+	// Wish -> Login (do NOT start music here; music should only start at 00:00:00)
 	const btnWishContinue = $("#btnWishContinue");
 	btnWishContinue?.addEventListener("click", () => {
 		if (!unlocked) return;
-		tryAutoStartMusic();
+		// tryAutoStartMusic(); // removed
 		showScreen("login");
 		passwordInput.focus();
 	});
