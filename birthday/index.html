@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>For You 💖</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+	<link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+	<!-- Ambient layers -->
+	<div class="bg" aria-hidden="true"></div>
+	<canvas id="heartsCanvas" aria-hidden="true"></canvas>
+
+	<!-- Confetti (burst on unlock / gallery load) -->
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+	<!-- Optional GSAP (used only if present) -->
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+	<main class="app" id="app">
+		<!-- PAGE 1: COUNTDOWN (LOCKED) -->
+		<section class="screen screen--active" id="screenCountdown" aria-label="Countdown">
+			<div class="hero">
+				<div class="hero__glow" aria-hidden="true"></div>
+
+				<h1 class="hero__title">
+					Something special is coming for you <span class="hero__accent">💕</span>
+				</h1>
+				<p class="hero__subtitle">A little surprise… unlocking at the perfect moment.</p>
+
+				<div class="countdown" id="countdown" role="timer" aria-live="polite">
+					<div class="countdown__tile">
+						<div class="countdown__num" id="cdDays">00</div>
+						<div class="countdown__label">Days</div>
+					</div>
+					<div class="countdown__tile">
+						<div class="countdown__num" id="cdHours">00</div>
+						<div class="countdown__label">Hours</div>
+					</div>
+					<div class="countdown__tile">
+						<div class="countdown__num" id="cdMins">00</div>
+						<div class="countdown__label">Minutes</div>
+					</div>
+					<div class="countdown__tile">
+						<div class="countdown__num" id="cdSecs">00</div>
+						<div class="countdown__label">Seconds</div>
+					</div>
+				</div>
+
+				<div class="cta">
+					<button class="btn btn--heart btn--locked" id="btnLoginLocked" disabled>
+						<span class="btn__icon" aria-hidden="true">🔒</span>
+						<span class="btn__text" id="unlockText">Login to unlock</span>
+					</button>
+					<div class="cta__note" id="lockedNote">Locked until your birthday moment.</div>
+				</div>
+
+				<!-- Optional subtle music (user interaction required to play on most browsers) -->
+				<audio id="bgMusic" preload="auto" loop>
+					<!-- Put your file in /assets/music and update src -->
+					<source src="./assets/music/romantic.mp3" type="audio/mpeg" />
+				</audio>
+			</div>
+		</section>
+
+		<!-- PAGE 1.5: WISH (AFTER COUNTDOWN) -->
+		<section class="screen" id="screenWish" aria-label="Birthday Wish">
+			<div class="hero">
+				<div class="hero__glow" aria-hidden="true"></div>
+
+				<h1 class="hero__title">
+					Happiest Birthday Aarya<span class="hero__accent">🎉🌻</span>
+				</h1>
+				<p class="hero__subtitle">Today is all about you.</p>
+
+				<div class="cta">
+					<button class="btn btn--heart" id="btnWishContinue" type="button">
+						<span class="btn__icon" aria-hidden="true">🌻</span>
+						<span class="btn__text">Continue</span>
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- PAGE 2: LOGIN -->
+		<section class="screen" id="screenLogin" aria-label="Login">
+			<div class="card">
+				<div class="card__border" aria-hidden="true"></div>
+				<div class="card__content">
+					<h2 class="card__title">One tiny secret…</h2>
+					<p class="card__subtitle">Only you know this. Then the memories begin.</p>
+
+					<label class="field">
+						<span class="field__label">Password</span>
+						<input class="field__input" id="passwordInput" type="password" autocomplete="off" placeholder="Type the secret..." />
+					</label>
+
+					<div class="hint" id="passwordHint">Hint: Our first movie together 🎬❤️</div>
+					<div class="error" id="loginError" role="status" aria-live="polite"></div>
+
+					<button class="btn btn--heart" id="btnLogin" type="button">
+						<span class="btn__text">Unlock 💖</span>
+					</button>
+
+					<button class="linkBack" id="backToCountdown" type="button">← Back</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- PAGE 3: GALLERY -->
+		<section class="screen" id="screenGallery" aria-label="Memory Gallery">
+			<div class="gallery">
+				<div class="gallery__bg" id="galleryBg" aria-hidden="true"></div>
+
+				<header class="gallery__topbar">
+					<div class="gallery__brand"><span>Our Memories</span> <span aria-hidden="true">🌻</span></div>
+					<div class="gallery__actions">
+						<button class="chip" id="toggleAutoplay" type="button" aria-pressed="false">Autoplay</button>
+						<button class="chip chip--ghost" id="restart" type="button">Restart</button>
+					</div>
+				</header>
+
+				<div class="viewer" id="viewer">
+					<figure class="memory" id="memoryCard">
+						<img class="memory__img" id="memoryImg" alt="Memory photo" />
+						<figcaption class="memory__caption">
+							<div class="memory__title" id="memoryTitle">—</div>
+							<div class="memory__text" id="memoryText">—</div>
+						</figcaption>
+					</figure>
+
+					<nav class="viewer__nav">
+						<button class="navBtn" id="prevBtn" type="button">Previous 💖</button>
+						<button class="navBtn navBtn--primary" id="nextBtn" type="button">Next ❤️</button>
+					</nav>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="module" src="./js/app.js"></script>
+</body>
+</html>
